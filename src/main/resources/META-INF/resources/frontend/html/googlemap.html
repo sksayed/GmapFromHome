@@ -1,0 +1,185 @@
+<link rel="import"
+	href="../../frontend/bower_components/polymer/polymer-element.html">
+<link rel="import"
+	href="../../frontend/bower_components/google-map/google-map.html">
+<link rel="import"
+	href="../../frontend/bower_components/google-map/google-map-poly.html">
+<link rel="import"
+	href="../../frontend/bower_components/google-map/google-map-point.html">
+<link rel="import" href="../bower_components/google-map/google-map-search.html">
+<dom-module id="google-map-component"> <template>
+<div id="googlemapid">
+ <style>
+google-map {
+	height: 96vh;
+	width: 66vw;
+	padding-left: 15vw;
+	overflow: hidden;
+}
+</style>
+ <google-map-search></google-map-search>
+ <google-map on-google-map-ready="mapReady" api-key="[[apikey]]" client-id="[[clientId]]" latitude="37.740445870939304" longitude="-122.43640419009208"></google-map>
+</div>
+</template> 
+
+<script>
+	       class GoogleMapComponent extends Polymer.Element {
+            static get is() {
+                return 'google-map-component'
+            }
+            
+            static get properties() {
+            	return {
+            	initialized: {
+                    type: Boolean,
+                    value: false
+                  },
+
+                  markers: {
+                        type: Array
+                      },
+                 map: {
+                	 type: Object
+                 },
+                 polylines: {
+                	 type: Array
+                 },
+                 center: {
+                	 type: Object
+                 },
+                 bounds: {
+                	 type: Object
+                 }
+              }
+            }
+            
+            ready() {
+             	super.ready();
+            }
+            
+            mapReady() {
+    			this.map = this.shadowRoot.querySelector("google-map");
+    			this.initialized = true;
+            	this.internalInit();
+            	this.showMarkers();
+            	this.showPolies();
+            	this.internalFitToBounds();
+    		}
+            
+            zoomToBounds(boundsIn) {
+            	this.bounds = boundsIn;
+            	this.internalFitToBounds();
+            }
+            
+            centerMap(centerIn) {
+            	this.center = centerIn;
+            	this.internalCenterMap();
+            }
+            
+            internalFitToBounds() {
+            	if (this.bounds != null && this.initialized) {
+            		var gbounds = new google.maps.LatLngBounds(this.bounds.sw, this.bounds.ne);
+	        		this.map.map.fitBounds(gbounds);
+            	}
+            }
+            
+            internalCenterMap() {
+            	if (this.initialized && this.center != null) {
+            		this.map.map.setCenter(this.center);
+					this.map.map.setZoom(2);
+            	}
+            }
+            
+            removeAll() {
+            	var map = this.shadowRoot.querySelector("google-map");
+            	while (map.firstChild) {
+      			    map.removeChild(map.firstChild);
+      			}
+            	this.markers = null;
+            	
+            	var i;
+            	for(i = 0; i < this.polylines.length; i++) {
+            		this.polylines[i].gpoly.setMap(null);
+            	}
+            	this.polylines = null;
+            }
+            
+            addMarker(markerIn) {
+            	this.internalInit();
+            	var marker = document.createElement('google-map-marker');
+ 	  			marker.longitude	= markerIn.longitude;
+ 				marker.latitude		= markerIn.latitude;
+ 				marker.label		= markerIn.label;
+ 				marker.id = markerIn.id;
+ 				this.markers.push(marker);
+ 				if (this.initialized) {
+ 					this.addMarkerToMap(marker);
+ 				}
+            }
+            
+            addPolyLine(polyLineIn) {
+            	this.internalInit();
+              	this.polylines.push(polyLineIn);
+            	if (this.initialized) {
+            		this.addPolyToMap(polyLineIn);
+            	}
+            }
+            
+            showPolies() {
+              	var i;
+            	for(i = 0; i < this.polylines.length; i++) {
+            		this.addPolyToMap(this.polylines[i]);
+            	}
+            }
+            
+            addPolyToMap(polyLineIn) {
+             	var polyline = new google.maps.Polyline(polyLineIn);
+             	polyline.setMap(this.map.map);
+             	polyLineIn.gpoly = polyline;
+            }
+            
+            addMarkerToMap(marker) {
+            	Polymer.dom(this.map).appendChild(marker);
+            }
+            
+            showMarkers() {
+            	var i;
+            	for(i = 0; i < this.markers.length; i++) {
+            		this.addMarkerToMap(this.markers[i]);
+            	}
+	        }
+            
+            setPolyColor(polyId, rgbColor) {
+            	this.internalInit();
+            	var i;
+            	for(i = 0; i < this.polylines.length; i++) {
+            		var poly = this.polylines[i];
+            		if (poly.id == polyId) {
+            			poly.strokeColor = rgbColor;
+            			if (poly.gpoly != null) {
+            				poly.gpoly.setOptions({strokeColor: rgbColor});
+            			}
+            			break;
+            		}
+            	}
+            }
+            
+            internalInit() {
+            	if (this.markers == null) {
+            		this.markers = new Array();
+            	}
+            	if (this.polylines == null) {
+            		this.polylines = new Array();
+            	}
+            }
+
+			internalSetZoomLevel ( zoomLevel) {
+				if(this.initialized && center != null){
+					this.map.map.setZoom(zoomLevel);
+				}
+			}
+        }
+        
+        customElements.define(GoogleMapComponent.is, GoogleMapComponent);
+</script> 
+</dom-module>
