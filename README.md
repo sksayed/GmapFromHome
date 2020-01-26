@@ -21,3 +21,7 @@ Branching information:
 * `V10` the version for Vaadin 10
 * `V11` the version for Vaadin 11
 * `V12` the version for Vaadin 12
+
+all the documentation for google map web components 
+https://github.com/GoogleWebComponents/google-map
+https://www.webcomponents.org/element/GoogleWebComponents/google-map/elements/google-map-marker#event-google-map-marker-click

@@ -92,11 +92,11 @@ public class MainView extends VerticalLayout {
 
                         getUI().get().access(() -> {
                             gm.removeAll();
-                            gm.addMarker(JsonConverter.createMarker("y", "j", lat, lon));
+                            gm.addMarker(JsonConverter.createMarker("y", "jasdasdasd", lat, lon));
                             MapBounds mb = new MapBounds();
                             mb.add(new LatLon(lat, lon));
                             gm.zoomToBounds(JsonConverter.createBounds(mb));
-                            gm.setZoomLevel(15);
+                           // gm.setZoomLevel(15);
                             UI.getCurrent().getUI().get().push();
                         });
 

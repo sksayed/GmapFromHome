@@ -1,13 +1,17 @@
 
 package com.gmail.goran.spring;
 
+import com.vaadin.flow.component.EventData;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.polymertemplate.EventHandler;
 import com.vaadin.flow.component.polymertemplate.Id;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 
 import elemental.json.JsonObject;
+
+import java.util.Locale;
 
 /**
  * Google map component.
@@ -51,6 +55,16 @@ public class GoogleMapComponent extends PolymerTemplate<GoogleMapTemplateModel> 
 
     public void removeAll () {
 	    getElement().callFunction("removeAll"  );
+    }
+
+    @EventHandler
+    private void handleClick(@EventData("event.altKey") boolean altPressed,
+                             @EventData("event.srcElement.tagName") String tag,
+                             @EventData("event.offsetX") int offsetX,
+                             @EventData("event.offsetY") int offsetY) {
+        System.out.println("Event alt pressed: " + altPressed);
+        System.out.println("Event tag: " + tag.toLowerCase(Locale.ENGLISH));
+        System.out.println("Click position on element: [" + offsetX + ", "+ offsetY +"]");
     }
 
 }

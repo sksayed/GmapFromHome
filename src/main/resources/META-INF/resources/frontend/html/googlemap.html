@@ -17,8 +17,9 @@ google-map {
 	overflow: hidden;
 }
 </style>
- <google-map on-google-map-ready="mapReady" api-key="[[apikey]]" client-id="[[clientId]]" latitude="37.740445870939304" longitude="-122.43640419009208" draggable="true"></google-map>
-</div>
+ <google-map on-google-map-ready="mapReady" api-key="[[apikey]]" client-id="[[clientId]]" latitude="37.740445870939304" longitude="-122.43640419009208" ></google-map>
+ <button id="b1" on-click="handleClick">Say hello</button> 
+</div> 
 </template> 
 
 <script>
@@ -114,12 +115,16 @@ google-map {
  				marker.id = markerIn.id;
 				 var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 				 marker.icon = image ;
+				 marker.clickEvents = true ;
+				 marker.addEventListener('google-map-marker-click' , function(e){
+						window.alert("Clicked");
+				 });
  				this.markers.push(marker);
  				if (this.initialized) {
  					this.addMarkerToMap(marker);
  				}
             }
-            
+			
             addPolyLine(polyLineIn) {
             	this.internalInit();
               	this.polylines.push(polyLineIn);
@@ -181,6 +186,8 @@ google-map {
 					this.map.zoom = zoomLevel ;
 				}
 			}
+
+			
         }
         
         customElements.define(GoogleMapComponent.is, GoogleMapComponent);
