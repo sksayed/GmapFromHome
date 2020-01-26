@@ -17,8 +17,7 @@ google-map {
 	overflow: hidden;
 }
 </style>
- <google-map-search></google-map-search>
- <google-map on-google-map-ready="mapReady" api-key="[[apikey]]" client-id="[[clientId]]" latitude="37.740445870939304" longitude="-122.43640419009208"></google-map>
+ <google-map on-google-map-ready="mapReady" api-key="[[apikey]]" client-id="[[clientId]]" latitude="37.740445870939304" longitude="-122.43640419009208" draggable="true"></google-map>
 </div>
 </template> 
 
@@ -59,6 +58,7 @@ google-map {
             
             mapReady() {
     			this.map = this.shadowRoot.querySelector("google-map");
+				this.map.zoom = 1 ;
     			this.initialized = true;
             	this.internalInit();
             	this.showMarkers();
@@ -107,10 +107,13 @@ google-map {
             addMarker(markerIn) {
             	this.internalInit();
             	var marker = document.createElement('google-map-marker');
+				console.log(marker);
  	  			marker.longitude	= markerIn.longitude;
  				marker.latitude		= markerIn.latitude;
  				marker.label		= markerIn.label;
  				marker.id = markerIn.id;
+				 var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+				 marker.icon = image ;
  				this.markers.push(marker);
  				if (this.initialized) {
  					this.addMarkerToMap(marker);
@@ -174,8 +177,8 @@ google-map {
             }
 
 			internalSetZoomLevel ( zoomLevel) {
-				if(this.initialized && center != null){
-					this.map.map.setZoom(zoomLevel);
+				if(this.initialized && this.map != null){
+					this.map.zoom = zoomLevel ;
 				}
 			}
         }
