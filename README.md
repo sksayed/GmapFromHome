@@ -23,5 +23,6 @@ Branching information:
 * `V12` the version for Vaadin 12
 
 all the documentation for google map web components 
-https://github.com/GoogleWebComponents/google-map
-https://www.webcomponents.org/element/GoogleWebComponents/google-map/elements/google-map-marker#event-google-map-marker-click
+    https://github.com/GoogleWebComponents/google-map
+    https://www.webcomponents.org/element/GoogleWebComponents/google-map/elements/google-map-marker#event-google-map-marker-click
+    https://vaadin.com/docs/v10/flow/polymer-templates/tutorial-template-event-handlers.html

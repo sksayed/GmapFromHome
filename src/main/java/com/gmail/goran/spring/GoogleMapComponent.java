@@ -58,13 +58,8 @@ public class GoogleMapComponent extends PolymerTemplate<GoogleMapTemplateModel> 
     }
 
     @EventHandler
-    private void handleClick(@EventData("event.altKey") boolean altPressed,
-                             @EventData("event.srcElement.tagName") String tag,
-                             @EventData("event.offsetX") int offsetX,
-                             @EventData("event.offsetY") int offsetY) {
-        System.out.println("Event alt pressed: " + altPressed);
-        System.out.println("Event tag: " + tag.toLowerCase(Locale.ENGLISH));
-        System.out.println("Click position on element: [" + offsetX + ", "+ offsetY +"]");
+    private void handleClick(@EventData("event.srcElement.tagName") String tag) {
+        System.out.println("Hello "+ tag);
     }
 
 }
