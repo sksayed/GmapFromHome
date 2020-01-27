@@ -1,10 +1,14 @@
-package com.gmail.goran.spring;
+package com.infoworks.lab.app;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.PendingResult;
 import com.google.maps.PlacesApi;
 import com.google.maps.TextSearchRequest;
 import com.google.maps.model.PlacesSearchResponse;
+import com.infoworks.lab.gmap.GoogleMapComponent;
+import com.infoworks.lab.gmap.JsonConverter;
+import com.infoworks.lab.gmap.LatLon;
+import com.infoworks.lab.gmap.MapBounds;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -23,8 +27,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-@Push
-@Route("")
+
+@Route("dashboard")
+
 public class MainView extends VerticalLayout {
 
     HorizontalLayout searchLayout;
@@ -96,8 +101,8 @@ public class MainView extends VerticalLayout {
                             MapBounds mb = new MapBounds();
                             mb.add(new LatLon(lat, lon));
                             gm.zoomToBounds(JsonConverter.createBounds(mb));
-                           // gm.setZoomLevel(15);
-                            UI.getCurrent().getUI().get().push();
+                            gm.setZoomLevel(15);
+
                         });
 
                     }

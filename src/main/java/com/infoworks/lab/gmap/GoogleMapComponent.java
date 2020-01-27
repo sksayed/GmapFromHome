@@ -1,5 +1,5 @@
 
-package com.gmail.goran.spring;
+package com.infoworks.lab.gmap;
 
 import com.vaadin.flow.component.EventData;
 import com.vaadin.flow.component.Tag;
@@ -10,8 +10,6 @@ import com.vaadin.flow.component.polymertemplate.Id;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 
 import elemental.json.JsonObject;
-
-import java.util.Locale;
 
 /**
  * Google map component.

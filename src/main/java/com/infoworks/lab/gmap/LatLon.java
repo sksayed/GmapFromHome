@@ -1,5 +1,5 @@
 
-package com.gmail.goran.spring;
+package com.infoworks.lab.gmap;
 
 /**
  * Lat/lon helper.

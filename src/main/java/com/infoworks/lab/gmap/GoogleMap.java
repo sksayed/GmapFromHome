@@ -1,4 +1,4 @@
-package com.gmail.goran.spring;
+package com.infoworks.lab.gmap;
 
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
