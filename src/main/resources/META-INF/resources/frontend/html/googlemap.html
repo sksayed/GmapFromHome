@@ -18,10 +18,9 @@ google-map {
 }
 </style>
  
-  <button id="b1" on-click="handleClick">
 	  <google-map on-google-map-ready="mapReady" api-key="[[apikey]]" client-id="[[clientId]]" latitude="37.740445870939304" longitude="-122.43640419009208" >	  
 	  </google-map>
-	</button> 
+	
 </div> 
 </template> 
 
@@ -29,7 +28,9 @@ google-map {
 	       class GoogleMapComponent extends Polymer.Element {
             static get is() {
                 return 'google-map-component'
-            }
+			}
+			
+		
             
             static get properties() {
             	return {
@@ -52,7 +53,11 @@ google-map {
                  },
                  bounds: {
                 	 type: Object
-                 }
+				 },
+				 
+				 zoomInit: {
+					type : Number 	
+				 }
               }
             }
             
@@ -62,12 +67,13 @@ google-map {
             
             mapReady() {
     			this.map = this.shadowRoot.querySelector("google-map");
-				this.map.zoom = 1 ;
-    			this.initialized = true;
+				this.initialized = true;
+				this.zoomInit = 8 ;
             	this.internalInit();
             	this.showMarkers();
             	this.showPolies();
-            	this.internalFitToBounds();
+				this.internalFitToBounds();
+				this.map.map.zoom = this.zoomInit;
     		}
             
             zoomToBounds(boundsIn) {
@@ -89,8 +95,8 @@ google-map {
             
             internalCenterMap() {
             	if (this.initialized && this.center != null) {
-            		this.map.map.setCenter(this.center);
-					this.map.map.setZoom(2);
+					this.map.map.setCenter(this.center);
+					this.map.map.zoom = 8 ;
             	}
             }
             
@@ -188,7 +194,9 @@ google-map {
 
 			internalSetZoomLevel ( zoomLevel) {
 				if(this.initialized && this.map != null){
-					this.map.zoom = zoomLevel ;
+					//console.log(this.map.zoom);
+					window.alert(" zoom is "+this.map.map.zoom);
+					this.map.map.zoom = zoomLevel ;
 				}
 			}
 

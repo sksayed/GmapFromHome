@@ -13,6 +13,7 @@ import com.vaadin.flow.component.UI;
 public class LoginDataSource extends RestDataSource {
 
     public static final String TOKEN = "token_key";
+    public static final String TENANT = "tenantID";
     public static final String AUTH_RESPONSE = "auth_response_key";
 
     public LoginDataSource() {
@@ -63,6 +64,7 @@ public class LoginDataSource extends RestDataSource {
           AuthResponse authResponse = login.post(credential , "/login");
           if(authResponse != null && authResponse.getAccessToken() != null){
               UI.getCurrent().getSession().setAttribute(LoginDataSource.TOKEN , authResponse.getAccessToken());
+              UI.getCurrent().getSession().setAttribute(LoginDataSource.TENANT , authResponse.getTenantID());
               UI.getCurrent().getSession().setAttribute(LoginDataSource.AUTH_RESPONSE , authResponse);
           }
 
@@ -74,7 +76,8 @@ public class LoginDataSource extends RestDataSource {
           e.printStackTrace();
       }
 
-        if ( UI.getCurrent().getSession().getAttribute(LoginDataSource.TOKEN) != null) {
+        if ( UI.getCurrent().getSession().getAttribute(LoginDataSource.TOKEN)
+                != null && UI.getCurrent().getSession().getAttribute(LoginDataSource.AUTH_RESPONSE) != null) {
             return true ;
         }else {
             return false ;
