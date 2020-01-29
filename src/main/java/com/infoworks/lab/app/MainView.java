@@ -12,7 +12,6 @@ import com.infoworks.lab.domain.datasource.LoginDataSource;
 import com.infoworks.lab.gmap.GoogleMapComponent;
 import com.infoworks.lab.gmap.JsonConverter;
 import com.infoworks.lab.gmap.LatLon;
-import com.infoworks.lab.gmap.MapBounds;
 import com.itsoul.lab.client.APIContext;
 import com.itsoul.lab.domain.base.SortOrder;
 import com.itsoul.lab.domain.models.messaging.Message;
@@ -22,8 +21,6 @@ import com.itsoul.lab.domain.models.pipeline.GeoLocation;
 import com.itsoul.lab.domain.models.pipeline.GeoTrackerInfo;
 import com.itsoul.lab.domain.models.pipeline.GeoTrackingEvent;
 import com.itsoul.lab.domain.models.utility.SearchQuery;
-import com.itsoul.lab.interactor.exceptions.UnauthorizedAccess;
-import com.itsoul.lab.interactor.factory.Interactors;
 import com.itsoul.lab.interactor.implementations.MessagingTemplate;
 import com.itsoul.lab.interactor.implementations.SocketType;
 import com.itsoul.lab.interactor.interfaces.Interactor;
@@ -34,7 +31,6 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
@@ -49,8 +45,8 @@ import java.util.concurrent.Future;
 
 
 @Route("dashboard")
-
 public class MainView extends VerticalLayout {
+
     public static String API_KEY = "AIzaSyA-ILRTlV8Gd-GvTXEP1oUQej4Q9ZDhe1k";
     private HorizontalLayout searchLayout;
     Button searchButton;
@@ -61,7 +57,6 @@ public class MainView extends VerticalLayout {
     //for getting this radius inside the lamda functions
     String radiusStr = "1000";
     Double radius ;
-    UI ui = UI.getCurrent();
 
     private Button showMotion = new Button("Motion");
     private static final long serialVersionUID = 1L;
@@ -87,21 +82,27 @@ public class MainView extends VerticalLayout {
         this.searchLayout = new HorizontalLayout();
         this.searchButton = buildSearchButton();
         this.searchField = new TextField();
-        searchLayout.add(searchField, searchButton);
+        Button logout = buildLogoutButton();
+        searchLayout.add(searchField, searchButton, logout);
         add(searchLayout, gm, showMotion);
         //addMarker();
+    }
+
+    private Button buildLogoutButton(){
+        Button logout = new Button("Logout");
+        logout.addClickListener((event) -> {
+            LoginDataSource.logout();
+        });
+        return logout;
     }
 
     private Button buildSearchButton() {
         //TODO: do modifications of the button here
         Button searchButton = new Button("Search");
         return searchButton;
-//        searchButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-//        searchButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
     }
 
     private void initListeners() {
-
 
         this.showMotion.addClickListener(new ComponentEventListener<ClickEvent<Button>>() {
             @Override

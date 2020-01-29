@@ -17,6 +17,7 @@ import java.util.Map;
 public class Login extends VerticalLayout {
 
     private LoginForm login ;
+
     public Login() {
         loginWindowInit();
         initListeners();
@@ -31,27 +32,11 @@ public class Login extends VerticalLayout {
     }
 
     private void initListeners(){
-
-        this.login.addLoginListener(new ComponentEventListener<AbstractLogin.LoginEvent>() {
-            @Override
-            public void onComponentEvent(AbstractLogin.LoginEvent loginEvent) {
-                if(LoginDataSource.validate(loginEvent.getUsername() , loginEvent.getPassword())){
-
-                    Map<String, String> env = System.getenv();
-                    GeoTracker.shared().initialize(null, null);
-                    Map target = GeoTracker.shared().updateServiceURLs(env.get(WebResource.API_PUBLIC_DNS.key()));
-                    env.forEach((key, value) -> {
-                        if (key.startsWith("com.itsoul.lab")){
-                            target.put(key, value);
-                        }
-                    });
-                    if (target.size() > 0) GeoTracker.shared().loadProperties(target);
-                    System.out.println("API Gateway:" + WebResource.API_GATEWAY.value());
-
-                    UI.getCurrent().navigate("dashboard");
-                }else {
-                    loginEvent.getSource().setError(true);
-                }
+        this.login.addLoginListener((loginEvent) -> {
+            if(LoginDataSource.validate(loginEvent.getUsername() , loginEvent.getPassword())){
+                UI.getCurrent().navigate("dashboard");
+            }else {
+                loginEvent.getSource().setError(true);
             }
         });
 

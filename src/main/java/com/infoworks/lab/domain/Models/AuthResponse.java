@@ -1,8 +1,8 @@
 package com.infoworks.lab.domain.Models;
 
-import com.infoworks.lab.rest.models.Response;
+import com.itsoul.lab.domain.base.Produce;
 
-public class AuthResponse extends Response {
+public class AuthResponse extends Produce {
 
     private String accessToken;
     private String tenantID;
