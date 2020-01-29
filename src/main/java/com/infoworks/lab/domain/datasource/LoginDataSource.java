@@ -1,13 +1,13 @@
 package com.infoworks.lab.domain.datasource;
 
+import com.infoworks.lab.components.db.source.JsqlDataSource;
+import com.infoworks.lab.components.rest.source.RestDataSource;
 import com.infoworks.lab.domain.Models.AuthResponse;
 import com.infoworks.lab.domain.Models.Credential;
 import com.infoworks.lab.domain.rest.templates.AuthTemplate;
 import com.infoworks.lab.exceptions.HttpInvocationException;
 import com.infoworks.lab.jsql.DataSourceKey;
 import com.infoworks.lab.rest.template.Interactor;
-import com.infoworks.lab.source.JsqlDataSource;
-import com.infoworks.lab.source.RestDataSource;
 import com.vaadin.flow.component.UI;
 
 public class LoginDataSource extends RestDataSource {
