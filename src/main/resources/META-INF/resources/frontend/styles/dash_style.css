@@ -57,13 +57,14 @@ body {
     outline: 0;
     color: #000;
     font-size: 1rem;
-    padding: 1rem 1.5rem;
+    padding: .5rem 1.5rem;
     cursor: pointer;
     font-family: inherit;
     line-height: 1;
     display: inline-block;
     text-align: center;
     font-weight: 500;
+    height: auto;
 }
 
 .button-light {
