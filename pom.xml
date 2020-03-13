@@ -112,16 +112,16 @@
 			<artifactId>http-rest-client</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>-->
-        <dependency>
-            <groupId>com.infoworks.lab</groupId>
-            <artifactId>jsql-editor-components</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-		<dependency>
-			<groupId>com.infoworks.lab</groupId>
-			<artifactId>vaadin-component</artifactId>
-			<version>1.1-SNAPSHOT-VAADIN-10</version>
-		</dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.infoworks.lab</groupId>-->
+<!--            <artifactId>jsql-editor-components</artifactId>-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--        </dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>com.infoworks.lab</groupId>-->
+<!--			<artifactId>vaadin-component</artifactId>-->
+<!--			<version>1.1-SNAPSHOT-VAADIN-10</version>-->
+<!--		</dependency>-->
 
         <dependency>
             <groupId>ch.hsr</groupId>
@@ -130,7 +130,7 @@
         </dependency>
 
         <!--Dependency added from android project-->
-        <dependency>
+       <!-- <dependency>
             <groupId>com.itsoul.lab</groupId>
             <artifactId>geo-tracker-micro-core</artifactId>
             <version>1.1</version>
@@ -164,7 +164,7 @@
             <groupId>com.itsoul.lab</groupId>
             <artifactId>micro-actorpool</artifactId>
             <version>1.1.2</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.glassfish</groupId>
