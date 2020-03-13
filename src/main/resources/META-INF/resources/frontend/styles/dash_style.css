@@ -180,6 +180,9 @@ body {
     width: calc(100% - 300px);
     margin-left: auto;
     padding: 100px;
+    height: calc(100vh - 100px);
+    top: 100px;
+    overflow-y: auto;
 }
 
 .user-rating {
@@ -191,5 +194,3 @@ body {
     margin: 0;
     margin-left: 5px;
 }
-
-
