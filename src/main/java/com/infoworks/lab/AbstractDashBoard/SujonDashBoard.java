@@ -32,7 +32,7 @@ public class SujonDashBoard extends Div implements RouterLayout {
     SideBarButton logoutButton = new SideBarButton("Logout");
 
     //SideBar
-    Div mainContentWraper = new Div();
+
     Div sideBar = new Div();
     Div nav = new Div();
     Div navBottom = new Div();
@@ -101,7 +101,6 @@ public class SujonDashBoard extends Div implements RouterLayout {
     }
 
     void createSideBar() {
-        mainContentWraper.addClassName("main-content-wrapper");
         sideBar.addClassName("sidebar");
         nav.addClassName("nav");
         navBottom.addClassName("nav");
@@ -111,8 +110,8 @@ public class SujonDashBoard extends Div implements RouterLayout {
         nav.add(overViewButton, orderListButton, liveLocation, paymentButton, settingsButton);
         navBottom.add(logoutButton);
         sideBar.add(nav,navBottom);
-        mainContent.addClassName("main-content");
-        mainContentWraper.add(sideBar,mainContent);
+       // mainContent.addClassName("main-content");
+
 
     }
 
@@ -121,6 +120,6 @@ public class SujonDashBoard extends Div implements RouterLayout {
         createLogoContainer();
         createHeaderContent();
         createSideBar();
-        add(header, mainContentWraper);
+        add(header, sideBar);
     }
 }
