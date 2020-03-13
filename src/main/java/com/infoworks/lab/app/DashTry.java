@@ -11,7 +11,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.dom.ClassList;
 import com.vaadin.flow.router.Route;
 @StyleSheet("styles/sujon_styles.css")
-@Route("")
+@Route("qweqw")
 public class DashTry extends Div {
 
     Div header = new Div();
