@@ -8,10 +8,13 @@ import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.contextmenu.ContextMenu;
+import com.vaadin.flow.component.contextmenu.GeneratedVaadinContextMenu;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
@@ -39,7 +42,6 @@ public class DashBoardFinal extends Div implements RouterLayout {
     SideBarButton logoutButton = new SideBarButton("Logout");
 
     //SideBar
-
     Div sideBar = new Div();
     Div nav = new Div();
     Div navBottom = new Div();
@@ -57,6 +59,9 @@ public class DashBoardFinal extends Div implements RouterLayout {
     Div notification = new Div();
     Icon notificationIcon = new Icon(VaadinIcon.BELL);
     Span notificationCounter = new Span("12");
+
+    //NOTIFICATION CONTEXT MENU
+    ContextMenu notificationContextMenu = new ContextMenu();
 
     void createLogoContainer() {
         logoContainer.addClassName("logo-container");
@@ -117,7 +122,6 @@ public class DashBoardFinal extends Div implements RouterLayout {
         nav.add(overViewButton, orderListButton, liveLocation, paymentButton, settingsButton);
         navBottom.add(logoutButton);
         sideBar.add(nav, navBottom);
-        // mainContent.addClassName("main-content");
 
     }
 
@@ -140,6 +144,16 @@ public class DashBoardFinal extends Div implements RouterLayout {
                 UI.getCurrent().navigate(LiveLocation.ROUTE_NAME);
             }
         });
+
+    }
+
+    void createNotificationContextMenu () {
+        notificationContextMenu.setTarget(notificationIcon);
+        notificationContextMenu.addItem("this is first one " , menuItemClickEvent -> {});
+        notificationContextMenu.addItem("this is Second one " , menuItemClickEvent -> {});
+        notificationContextMenu.addItem("this is Third one " , menuItemClickEvent -> {});
+        notificationContextMenu.setOpenOnClick(true);
+
     }
 
     protected DashBoardFinal() {
@@ -147,6 +161,7 @@ public class DashBoardFinal extends Div implements RouterLayout {
         createLogoContainer();
         createHeaderContent();
         createSideBar();
+        createNotificationContextMenu();
         sideBarButtonListener();
         add(header, sideBar);
     }
