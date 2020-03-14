@@ -19,9 +19,9 @@ import com.vaadin.flow.router.Route;
  */
 @Route("asdasd")
 @StyleSheet("styles/style.css")
-public class SujonView extends VerticalLayout {
+public class ExperimentalDashBoard extends VerticalLayout {
 
-    public SujonView() {
+    public ExperimentalDashBoard() {
         // HEADER
         Icon drawer = VaadinIcon.MENU.create();
         Span title = new Span("My application");

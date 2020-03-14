@@ -1,17 +1,27 @@
 package com.infoworks.lab.AbstractDashBoard;
 
+import com.infoworks.lab.app.LiveLocation;
+import com.infoworks.lab.app.OrderList;
+import com.infoworks.lab.app.Payment;
 import com.infoworks.lab.app.SideBarButton;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.contextmenu.ContextMenu;
+import com.vaadin.flow.component.contextmenu.GeneratedVaadinContextMenu;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
+import com.vaadin.flow.router.RouterLink;
 
 
 @StyleSheet("styles/dash_style.css")
-public class SujonDashBoard extends Div implements RouterLayout {
+public class DashBoardFinal extends Div implements RouterLayout {
     Div header = new Div();
     Div logoContainer = new Div();
     H3 logo = new H3("Logo");
@@ -20,19 +30,18 @@ public class SujonDashBoard extends Div implements RouterLayout {
     Div headerRight = new Div();
     Div userProfile = new Div();
     Div userAvatar = new Div();
-   protected Div mainContent = new Div();
+    protected Div mainContent = new Div();
     Icon userimage = new Icon(VaadinIcon.USER);
     Button addYourStoreLocationButton = new Button("Add your Store Location");
     Button createOrderButton = new Button("Create Order");
     Button overViewButton = new Button();
-    SideBarButton orderListButton = new SideBarButton("OrderList");
-    SideBarButton liveLocation = new SideBarButton("Live location");
+    SideBarButton orderListButton = new SideBarButton("OrderList" );
+    SideBarButton liveLocation = new SideBarButton("Live location" );
     SideBarButton paymentButton = new SideBarButton("Payment");
     SideBarButton settingsButton = new SideBarButton("Settings");
     SideBarButton logoutButton = new SideBarButton("Logout");
 
     //SideBar
-
     Div sideBar = new Div();
     Div nav = new Div();
     Div navBottom = new Div();
@@ -50,6 +59,9 @@ public class SujonDashBoard extends Div implements RouterLayout {
     Div notification = new Div();
     Icon notificationIcon = new Icon(VaadinIcon.BELL);
     Span notificationCounter = new Span("12");
+
+    //NOTIFICATION CONTEXT MENU
+    ContextMenu notificationContextMenu = new ContextMenu();
 
     void createLogoContainer() {
         logoContainer.addClassName("logo-container");
@@ -109,17 +121,48 @@ public class SujonDashBoard extends Div implements RouterLayout {
         overViewButton.setText("OverView");
         nav.add(overViewButton, orderListButton, liveLocation, paymentButton, settingsButton);
         navBottom.add(logoutButton);
-        sideBar.add(nav,navBottom);
-       // mainContent.addClassName("main-content");
-
+        sideBar.add(nav, navBottom);
 
     }
 
-   protected SujonDashBoard() {
+    void sideBarButtonListener() {
+        paymentButton.addClickListener(new ComponentEventListener<ClickEvent<Button>>() {
+            @Override
+            public void onComponentEvent(ClickEvent<Button> buttonClickEvent) {
+                UI.getCurrent().navigate(Payment.ROUTE_NAME);
+            }
+        });
+        orderListButton.addClickListener(new ComponentEventListener<ClickEvent<Button>>() {
+            @Override
+            public void onComponentEvent(ClickEvent<Button> buttonClickEvent) {
+                UI.getCurrent().navigate(OrderList.ROUTE_NAME);
+            }
+        });
+        liveLocation.addClickListener(new ComponentEventListener<ClickEvent<Button>>() {
+            @Override
+            public void onComponentEvent(ClickEvent<Button> buttonClickEvent) {
+                UI.getCurrent().navigate(LiveLocation.ROUTE_NAME);
+            }
+        });
+
+    }
+
+    void createNotificationContextMenu () {
+        notificationContextMenu.setTarget(notificationIcon);
+        notificationContextMenu.addItem("this is first one " , menuItemClickEvent -> {});
+        notificationContextMenu.addItem("this is Second one " , menuItemClickEvent -> {});
+        notificationContextMenu.addItem("this is Third one " , menuItemClickEvent -> {});
+        notificationContextMenu.setOpenOnClick(true);
+
+    }
+
+    protected DashBoardFinal() {
         addClassName("wrapper");
         createLogoContainer();
         createHeaderContent();
         createSideBar();
+        createNotificationContextMenu();
+        sideBarButtonListener();
         add(header, sideBar);
     }
 }

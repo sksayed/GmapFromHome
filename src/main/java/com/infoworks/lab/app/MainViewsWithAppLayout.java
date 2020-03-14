@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class MainViews implements BeforeEnterObserver, RouterLayout {
+public class MainViewsWithAppLayout implements BeforeEnterObserver, RouterLayout {
 
     AppLayout appLayout = new AppLayout();
     private Tabs tabs = new Tabs();
@@ -27,7 +27,8 @@ public class MainViews implements BeforeEnterObserver, RouterLayout {
 
     Span Header = new Span(" This is header ");
 
-    public MainViews() {
+
+    public MainViewsWithAppLayout() {
 
         appLayoutMenu = appLayout.createMenu();
         appLayout.setBranding(Header);

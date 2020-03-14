@@ -1,11 +1,12 @@
 package com.infoworks.lab.app;
 
-import com.infoworks.lab.AbstractDashBoard.SujonDashBoard;
+import com.infoworks.lab.AbstractDashBoard.DashBoardFinal;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.html.Div;
 
-public abstract class ExtendedDiv extends SujonDashBoard {
+public abstract class ExtendedDiv extends Div {
 
-   void addToMain (Component... components){
-      this.mainContent.add(components);
-  }
+   ExtendedDiv(){
+       addClassName("main-content");
+   }
 }

@@ -12,7 +12,7 @@ import com.vaadin.flow.dom.ClassList;
 import com.vaadin.flow.router.Route;
 @StyleSheet("styles/sujon_styles.css")
 @Route("qweqw")
-public class DashTry extends Div {
+public class DashBoardFirstTry extends Div {
 
     Div header = new Div();
     HorizontalLayout headerLayout = new HorizontalLayout();
@@ -31,7 +31,7 @@ public class DashTry extends Div {
     Div leftSideBar = new Div();
 
 
-    DashTry(){
+    DashBoardFirstTry(){
         createHeader();
     }
     private void createHeader (){
